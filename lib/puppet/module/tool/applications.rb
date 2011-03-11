@@ -9,10 +9,10 @@ module Puppet::Module::Tool
     require 'puppet/module/tool/applications/generator'
     require 'puppet/module/tool/applications/installer'
     require 'puppet/module/tool/applications/registrar'
-    require 'puppet/module/tool/applications/releaser'
+#    require 'puppet/module/tool/applications/releaser'
     require 'puppet/module/tool/applications/searcher'
     require 'puppet/module/tool/applications/unpacker'
-    require 'puppet/module/tool/applications/unreleaser'
+#    require 'puppet/module/tool/applications/unreleaser'
     
   end
 end

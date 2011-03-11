@@ -1,4 +1,5 @@
 require 'puppet/interface'
+require 'puppet/module/tool'
 
 Puppet::Interface.new :module do
   action :version do

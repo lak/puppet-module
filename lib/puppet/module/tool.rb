@@ -72,38 +72,38 @@ module Puppet
 end
 
 # Add vendored code paths to $LOAD_PATH
-Dir[Puppet::Module::Tool.root + 'vendor/*/lib'].each do |path|
-  $LOAD_PATH.unshift(path)
-end
-
-# Load vendored libraries
-require 'facets/kernel/tap'
-require 'facets/kernel/returning'
+#Dir[Puppet::Module::Tool.root + 'vendor/*/lib'].each do |path|
+#  $LOAD_PATH.unshift(path)
+#end
+#
+## Load vendored libraries
+#require 'facets/kernel/tap'
+#require 'facets/kernel/returning'
 
 # Load rubygems, so we can load Puppet and parse version numbers
-require 'rubygems'
-
-# Load Puppet
-begin
-  minimum_version = Gem::Version.new("0.25.0")
-  message = "You must have Puppet #{minimum_version} or greater installed"
-
-  begin
-    require 'puppet'
-  rescue LoadError
-    abort message
-  end
-
-  begin
-    current_version = Gem::Version.new(Puppet.version)
-  rescue
-    abort "#{message} -- couldn't parse version"
-  end
-
-  if current_version <= minimum_version
-    abort "#{message} -- you're running #{current_version}"
-  end
-end
+#require 'rubygems'
+#
+## Load Puppet
+#begin
+#  minimum_version = Gem::Version.new("0.25.0")
+#  message = "You must have Puppet #{minimum_version} or greater installed"
+#
+#  begin
+#    require 'puppet'
+#  rescue LoadError
+#    abort message
+#  end
+#
+#  begin
+#    current_version = Gem::Version.new(Puppet.version)
+#  rescue
+#    abort "#{message} -- couldn't parse version"
+#  end
+#
+#  if current_version <= minimum_version
+#    abort "#{message} -- you're running #{current_version}"
+#  end
+#end
 
 # Add support for Puppet's settings file
 require 'puppet/module/tool/utils'
