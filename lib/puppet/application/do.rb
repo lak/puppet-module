@@ -1,6 +1,6 @@
-require 'puppet/application/interface_base'
+require 'puppet/application/string_base'
 
-class Puppet::Application::Do < Puppet::Application::InterfaceBase
+class Puppet::Application::Do < Puppet::Application::StringBase
   def main
     args = command_line.args
     type = args.shift or raise "You must specify the type to display"

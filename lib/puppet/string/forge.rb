@@ -1,6 +1,6 @@
-require 'puppet/interface'
+require 'puppet/string'
 
-Puppet::Interface.new :forge do
+Puppet::String.new :forge do
 #  desc "clean", "Clears module cache for all repositories"
   action :clean do
     Puppet::Module::Tool::Applications::Cleaner.run(arguments)

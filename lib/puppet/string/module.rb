@@ -1,7 +1,7 @@
-require 'puppet/interface'
+require 'puppet/string'
 require 'puppet/module/tool'
 
-Puppet::Interface.new :module do
+Puppet::String.new :module do
   action :version do
     say Puppet::Module::Tool.version
   end

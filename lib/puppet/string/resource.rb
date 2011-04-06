@@ -1,7 +1,7 @@
-require 'puppet/interface/indirector'
+require 'puppet/string/indirector'
 require 'puppet/node/facts'
 
-Puppet::Interface::Indirector.new(:resource) do
+Puppet::String::Indirector.new(:resource) do
 
   action :edit do |type, name|
     text = run_unnamed_collect_method(type, name)

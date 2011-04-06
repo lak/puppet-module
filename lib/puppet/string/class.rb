@@ -1,7 +1,7 @@
-require 'puppet/interface'
+require 'puppet/string'
 require 'puppet/module'
 
-Puppet::Interface.new :class do
+Puppet::String.new :class do
   action :commit do
     unless current
       raise "Not currently working on a class"
