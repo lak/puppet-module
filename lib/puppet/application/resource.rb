@@ -1,30 +1,18 @@
-require 'puppet/application/interface_base'
+require 'puppet/application'
+require 'puppet/application/indirection_base'
 
-class Puppet::Application::Resource < Puppet::Application::InterfaceBase
+class Puppet::Application::Resource < Puppet::Application::IndirectionBase
   attr_accessor :host
-
-  option("--edit","-e")
 
   option("--host HOST","-H") do |arg|
     @host = arg
-  end
-
-  option("--types", "-t") do |arg|
-    types = []
-    Puppet::Type.loadall
-    Puppet::Type.eachtype do |t|
-      next if t.name == :component
-      types << t.name.to_s
-    end
-    puts types.sort
-    exit
   end
 
   option("--param PARAM", "-p") do |arg|
     @extra_params << arg.to_sym
   end
 
-  def main
+  def oldmain
     args = command_line.args
     type = args.shift or raise "You must specify the type to display"
     typeobj = Puppet::Type.type(type) or raise "Could not find type #{type}"
@@ -74,34 +62,8 @@ class Puppet::Application::Resource < Puppet::Application::InterfaceBase
     end.map(&format).join("\n")
 
     if options[:edit]
-      file = "/tmp/x2puppet-#{Process.pid}.pp"
-      begin
-        File.open(file, "w") do |f|
-          f.puts text
-        end
-        ENV["EDITOR"] ||= "vi"
-        system(ENV["EDITOR"], file)
-        system("puppet -v #{file}")
-      ensure
-        #if FileTest.exists? file
-        #    File.unlink(file)
-        #end
-      end
     else
       puts text
-    end
-  end
-
-  def setup
-    Puppet::Util::Log.newdestination(:console)
-
-    # Now parse the config
-    Puppet.parse_config
-
-    if options[:debug]
-      Puppet::Util::Log.level = :debug
-    elsif options[:verbose]
-      Puppet::Util::Log.level = :info
     end
   end
 end
